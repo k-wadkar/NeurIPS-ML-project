@@ -6,11 +6,9 @@ import matplotlib.pyplot as plt
 data = pd.read_csv("wdbc.csv") 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, accuracy_score
 from sklearn.metrics import confusion_matrix
@@ -49,23 +47,6 @@ print(f"Sensitivity (True Positive Rate): {sensitivity_rf:.4f}")
 print(f"Specificity (True Negative Rate): {specificity_rf:.4f}")
 print("Classification Report:")
 print(classification_report(y_test, y_pred))
-
-dt_model = DecisionTreeClassifier(random_state=42)
-
-# Train the model
-dt_model.fit(X_train, y_train)
-
-# Make predictions
-y_pred_dt = dt_model.predict(X_test)
-
-# Evaluate the model
-sensitivity_dt, specificity_dt = calculate_metrics(y_test, y_pred_dt)
-print("Decision Tree:")
-print("Accuracy:", accuracy_score(y_test, y_pred_dt))
-print(f"Sensitivity: {sensitivity_dt:.4f}")
-print(f"Specificity: {specificity_dt:.4f}")
-print("Classification Report:")
-print(classification_report(y_test, y_pred_dt))
 
 nb_model = GaussianNB()
 
@@ -115,23 +96,7 @@ print(f"Sensitivity: {sensitivity_svm:.4f}")
 print(f"Specificity: {specificity_svm:.4f}")
 print("Classification Report:")
 print(classification_report(y_test, y_pred_svm))
-knn_model = KNeighborsClassifier(n_neighbors=3)
 
-# Train the model
-knn_model.fit(X_train, y_train)
-
-# Make predictions
-y_pred_knn = knn_model.predict(X_test)
-
-# Evaluate the model
-sensitivity_knn, specificity_knn = calculate_metrics(y_test, y_pred_knn)
-print("k-Nearest Neighbors:")
-print("Accuracy:", accuracy_score(y_test, y_pred_knn))
-print(f"Sensitivity: {sensitivity_knn:.4f}")
-print(f"Specificity: {specificity_knn:.4f}")
-print("Classification Report:")
-print(classification_report(y_test, y_pred_knn))
-lr_model = LogisticRegression(max_iter=1000, random_state=42)
 
 # Train the model
 lr_model.fit(X_train, y_train)
